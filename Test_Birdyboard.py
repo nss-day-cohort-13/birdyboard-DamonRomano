@@ -1,0 +1,12 @@
+import birdyboard
+
+test_that_there_is_a_main_menu(self):
+
+test_that_there_is_are_any_necessary_submenus(self):
+
+  test_that_a_choose_use_submenu_appears_when_Select_User_is_entered_from_main_menu(self):
+
+  test_that_confirmation_message_appears_when_Exit_is_entered_from_main_menu(self):
+
+
+test_that_
