@@ -8,13 +8,11 @@ class TestUser(unittest.TestCase):
     pass
 
   def test_user_creation(self):
-    user = User("Tractor Ryan", "tryan")
-    self.assertEqual("Tractor Ryan", user.full_name)
-    self.assertEqual("tryan", user.screen_name)
+    user = User("Mac", "The Knife")
+    self.assertEqual("Mac", user.full_name)
+    self.assertEqual("The Knife", user.screen_name)
     self.assertIsNotNone(user.user_id)
     self.assertIsInstance(user, User)
-    pass
-
 
 
 if __name__ == '__main__':
