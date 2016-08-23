@@ -4,7 +4,6 @@ from chirp import *
 active_user = None
 
 def main_menu():
-
     global active_user
 
     print   ("""
@@ -26,18 +25,16 @@ def main_menu():
     selection = input("Please Make A Selection:")
     if selection == '1':
         print   ("""
-                Create A New User Account Because \n
-                You Think We Won't Know It's Still You. \n
-                Creeper. \n
-                Please Enter the New User's Full Name\n
-                \n
+                Create A New User Account
+                Because You Think We Won't Know
+                It's Still You. \n
+                You Creeper. \n
+                Whatever. Enter the "New User's" Full Name\n
                 """)
 
         user_full_name = input(">")
-
         print   ("""
-                Please Enter the New User's Screen Name
-                \n\n
+                Please Enter the New User's Screen Name\n
                 """)
 
         user_screen_name = input(">")
@@ -58,10 +55,8 @@ def main_menu():
         with open('users.p', 'rb') as u:
             user_list = []
             while True:
-
                 try:
                     user_list.append(pickle.load(u))
-
                 except EOFError:
                     break
 
@@ -94,11 +89,10 @@ def main_menu():
 
         chirp = input(">")
 
-
         new_chirp = Chirp(active_user.user_UUID, chirp)
 
         chirp_list()
-        input (">")
+        input ("Press Enter to return to Main Menu.")
         main_menu()
 
 
@@ -107,7 +101,7 @@ def main_menu():
                 View All Chirps
                 """)
         chirp_list()
-        input (">")
+        input ("Press Enter to return to Main Menu.")
         main_menu()
 
     elif selection == '5':
@@ -119,20 +113,16 @@ def main_menu():
 
 
 def chirp_list():
-
     global active_user
 
     try:
         chirp_list = []
         with open('chirps.p', 'rb') as c:
             while True:
-
                 try:
                     chirp_list.append(pickle.load(c))
-
                 except EOFError:
                     break
-
                 except FileNotFoundError:
                     chirp_list = []
                     print("FNF chirp_list")
@@ -140,10 +130,8 @@ def chirp_list():
         user_list = []
         with open('users.p', 'rb') as u:
             while True:
-
                 try:
                     user_list.append(pickle.load(u))
-
                 except EOFError:
                     break
 
@@ -155,14 +143,15 @@ def chirp_list():
                     break
 
             print   (
-            str(number)
-            + ". "
-            + user.screen_name
-            + ":  "
-            + chirp.text
-            )
+                    str(number)
+                    + ". "
+                    + user.screen_name
+                    + ":  "
+                    + chirp.text
+                    )
+
     except FileNotFoundError:
-        print("No File, Fucker!")
+        print("No chirp list found. Try making a chirp.")
 
 
 main_menu()
