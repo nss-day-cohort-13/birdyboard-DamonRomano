@@ -1,26 +1,19 @@
-import sys
 import pickle
-import birdyboard
+import uuid
 
-    class Chirp:
+class Chirp:
 
-    def read_chirps(chirps):
-
-        try:
-            with open('chirps.p', 'rb') as c:
-                deserialized_chirps = pickle.load(c)
-
-        except (FileNotFoundError, EOFError):
-            deserialized_chirps = {}
+    def __init__(self,
+                 user_UUID,
+                 text
+                 ):
 
 
-        if "User" not in deserialized_chirps:
-            deserialized_chirps["User"] = []
-        deserialized_chirps["User"].append(chirps)
+        self.chirp_UUID = uuid.uuid4().int
+        self.user_UUID = user_UUID
+        self.text = text
 
-        with open('chirps.p', 'wb+') as m:
-            pickle.dump(deserialized_chirps, m)
-            print(deserialized_chirps)
+    # serialize some shit - this will serialize each user as he is created, rather than serializing the whole list of users and appending to that list with each user created.
 
-if __name__ == "__main__":
-  User.read_chirps(sys.argv[1])
+        with open('chirps.p', 'ab+') as c:
+            pickle.dump(self, c)

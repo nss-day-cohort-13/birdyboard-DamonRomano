@@ -1,4 +1,5 @@
 import pickle
+import uuid
 
 class New_User:
 
@@ -7,7 +8,7 @@ class New_User:
                  user_screen_name
                  ):
 
-        self.user_UUID = None
+        self.user_UUID = uuid.uuid4().int
         self.name = user_full_name
         self.screen_name = user_screen_name
 
