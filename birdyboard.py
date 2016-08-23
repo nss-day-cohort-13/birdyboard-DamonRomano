@@ -1,4 +1,5 @@
 from create_new_user import *
+from chirp import *
 
 active_user = None
 
@@ -49,9 +50,8 @@ def main_menu():
 
     elif selection == '2':
         print ("Who would you like to pretend you are today?")
+
         # print list of user names from users.p
-
-
         with open('users.p', 'rb') as u:
             user_list = []
             while True:
@@ -63,8 +63,10 @@ def main_menu():
                     break
 
         for number, user in enumerate(user_list, start=1):
-            print (str(number) + ". " + user.screen_name)
-
+            print   (str(number)
+                    + ". "
+                    + user.screen_name
+                    )
 
         # then pick one from list
         choice_of_user = input (">")
@@ -74,43 +76,44 @@ def main_menu():
         main_menu()
 
 
-
-
     elif selection == '3':
-        print ("You are logged in as " + active_user.screen_name)
+        print   (
+                "\n" "\n"
+                "You are logged in as "
+                + active_user.screen_name
+                "\n" "\n"
+                "Write A New Chirp"
+                "\n" "\n"
+                )
 
+                
+    elif selection == '4':
         print   (
                 "\n"
-                "View All Chirps" "\n" "\n"
-                "1. View all private Chirps." "\n"
-                "2. View all public Chirps."
+                "View All Chirps"
+                "\n"
                 )
-        input (">")
+        with open('chirps.p', 'rb') as c:
+            chirp_list = []
+            while True:
 
-    #     if selection == '1':
-    #         # goto list of users with whom this user has private Chirps
-    #     elif selection == '2':
-    #         # goto chronological list of all public chirps.
-    #         #   Hmm...chronological by first Chirp or by most recent reply?)
-    #     else print ("You don't know what you want.")
+                try:
+                    chirp_list.append(pickle.load(c))
 
-    # elif selection == '4':
-    #     print ("You Can Make A New Public Chirp!")
-    #     print ("No, go ahead;  We're all so interested in what you have to say.")
-    #     print ("")
-    #     input (">")
+                except EOFError:
+                    break
 
-    elif selection == '5':
-        print ("You Can Make A New Private Chirp!")
-        print ("From which user do you desperately crave attention," \
-                " you very lonely person?")
-        print ("")
-        # print (numbered userlist)
-        print ("")
-        input (">")
+        for number, chirp in enumerate(chirp_list, start=1):
+            print   (
+                    str(number)
+                    + ". "
+                    + user.screen_name
+                    + chirp.text
+                    )
+
 
     elif selection == '5':
-        print ("Yes!  Go outside; play in the rain. Love yourself more than this.")
+        print ("Yes!  Love yourself more than this.  Go outside; play in the rain. ")
         # exit python console
 
     else:
