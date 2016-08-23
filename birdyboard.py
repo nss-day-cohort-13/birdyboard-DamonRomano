@@ -1,8 +1,4 @@
-# test, then logic, then menu, then files.
-
-
-import pickle
-# from magic import spells
+from create_new_user import *
 
 print   (
         '\n'
@@ -15,10 +11,9 @@ print   (
         '\n' '\n'
         '1. Create New User Account' '\n'
         '2. Select User' '\n'
-        '3. View All Chirps' '\n'
-        '4. Make New Public Chirp' '\n'
-        '5. Make New Private Chirp' '\n'
-        '6. Exit Birdyboard' '\n'
+        '3. Make New Chirp' '\n'
+        '4. View All Chirps' '\n'
+        '5. Exit Birdyboard' '\n'
         '\n'
         )
 
@@ -33,7 +28,6 @@ if selection == '1':
             )
 
     user_full_name = input(">")
-    # store in memory, then
 
     print   (
             "Please Enter the New User's Screen Name"
@@ -41,6 +35,11 @@ if selection == '1':
             )
 
     user_screen_name = input(">")
+
+    # something with create_new_user.py
+
+    active_user = New_User(user_full_name, user_screen_name)
+
 
 elif selection == '2':
     print ("Who would you like to pretend you are today?")
@@ -78,7 +77,7 @@ elif selection == '5':
     print ("")
     input (">")
 
-elif selection == '6':
+elif selection == '5':
     print ("Yes!  Go outside; play in the rain. Love yourself more than this.")
     # exit python console
 
