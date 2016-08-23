@@ -9,7 +9,7 @@ class Chirp:
                  ):
 
         self.chirp_UUID = uuid.uuid4().int
-        self.user_UUID = active_user.screen_name
+        self.user_UUID = user_UUID
         self.text = text
 
     # serialize some shit - this will serialize each user as he is created, rather than serializing the whole list of users and appending to that list with each user created.

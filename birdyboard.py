@@ -7,39 +7,38 @@ def main_menu():
 
     global active_user
 
-    print   (
-            '\n'
-            'WELCOME TO BIRDYBOARD, A FLAGRANT COPYRIGHT VIOLATION!'
-            '\n' '\n'
-            'Your real life is teh suxx0r;' '\n'
-            'waste yourself away on social media instead!'
-            '\n' '\n'
-            'Main Menu:'
-            '\n' '\n'
-            '1. Create New User Account' '\n'
-            '2. Select User' '\n'
-            '3. Make New Chirp' '\n'
-            '4. View All Chirps' '\n'
-            '5. Exit Birdyboard' '\n'
-            '\n'
-            )
+    print   ("""
+            \n\n
+            WELCOME TO BIRDYBOARD, A FLAGRANT COPYRIGHT VIOLATION!
+
+            Your real life is teh suxx0r;
+            waste yourself away on social media instead!
+
+            Main Menu:
+            1. Create New User Account
+            2. Select User
+            3. Make New Chirp
+            4. View All Chirps
+            5. Exit Birdyboard
+
+            """)
 
     selection = input("Please Make A Selection:")
     if selection == '1':
-        print   (
-                "Create A New User Account Because " \
-                "You Think We Won't Know It's Still You." "\n"
-                "Creeper." '\n'
-                "Please Enter the New User's Full Name"
-                "\n" "\n"
-                )
+        print   ("""
+                Create A New User Account Because \n
+                You Think We Won't Know It's Still You. \n
+                Creeper. \n
+                Please Enter the New User's Full Name\n
+                \n
+                """)
 
         user_full_name = input(">")
 
-        print   (
-                "Please Enter the New User's Screen Name"
-                "\n" "\n"
-                )
+        print   ("""
+                Please Enter the New User's Screen Name
+                \n\n
+                """)
 
         user_screen_name = input(">")
 
@@ -49,7 +48,11 @@ def main_menu():
 
 
     elif selection == '2':
-        print ("Who would you like to pretend you are today?")
+        print   ("""
+                \n\n
+                Who would you like to pretend you are today?
+                \n\n
+                """)
 
         # print list of user names from users.p
         with open('users.p', 'rb') as u:
@@ -71,30 +74,57 @@ def main_menu():
         # then pick one from list
         choice_of_user = input (">")
         active_user = user_list[int(choice_of_user) - 1]
-        print ("Welcome " + active_user.screen_name + "! You have no friends IRL!")
+        print   ("""
+                \n\n
+                Welcome {}! You have no friends IRL!
+                \n\n
+                """.format(active_user.screen_name)
+                )
 
         main_menu()
 
 
     elif selection == '3':
-        print   (
-                "\n" "\n"
-                "You are logged in as "
-                + active_user.screen_name
-                "\n" "\n"
-                "Write A New Chirp"
-                "\n" "\n"
-                )
+        print   ("""
+            You are logged in as {}.
 
-                
+            Write a new chirp:
+            """.format(active_user.screen_name)
+            )
+
+        chirp = input(">")
+
+
+        new_chirp = Chirp(active_user.user_UUID, chirp)
+
+        chirp_list()
+        input (">")
+        main_menu()
+
+
     elif selection == '4':
-        print   (
-                "\n"
-                "View All Chirps"
-                "\n"
-                )
+        print   ("""
+                View All Chirps
+                """)
+        chirp_list()
+        input (">")
+        main_menu()
+
+    elif selection == '5':
+        print ("Yes!  Love yourself more than this.  Go outside; play in the rain. ")
+        exit()
+
+    else:
+        print ("You want the impossible.")
+
+
+def chirp_list():
+
+    global active_user
+
+    try:
+        chirp_list = []
         with open('chirps.p', 'rb') as c:
-            chirp_list = []
             while True:
 
                 try:
@@ -103,20 +133,36 @@ def main_menu():
                 except EOFError:
                     break
 
+                except FileNotFoundError:
+                    chirp_list = []
+                    print("FNF chirp_list")
+
+        user_list = []
+        with open('users.p', 'rb') as u:
+            while True:
+
+                try:
+                    user_list.append(pickle.load(u))
+
+                except EOFError:
+                    break
+
         for number, chirp in enumerate(chirp_list, start=1):
+            user = None
+            for u in user_list:
+                if u.user_UUID == chirp.user_UUID:
+                    user = u
+                    break
+
             print   (
-                    str(number)
-                    + ". "
-                    + user.screen_name
-                    + chirp.text
-                    )
+            str(number)
+            + ". "
+            + user.screen_name
+            + ":  "
+            + chirp.text
+            )
+    except FileNotFoundError:
+        print("No File, Fucker!")
 
-
-    elif selection == '5':
-        print ("Yes!  Love yourself more than this.  Go outside; play in the rain. ")
-        # exit python console
-
-    else:
-        print ("You want the impossible.")
 
 main_menu()
