@@ -1,6 +1,4 @@
 import unittest
-import CoversationSingleton
-
 
 class TestChirp(unittest.TestCase):
 
@@ -41,7 +39,7 @@ class TestChirp(unittest.TestCase):
                       receiver=target.user_id
                       )
     self.assertIsInstance(chirp, Chirp)
-    
+
 
 if __name__ == '__main__':
     unittest.main()
